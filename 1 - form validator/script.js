@@ -48,7 +48,7 @@ form.addEventListener('submit', function(e) {
     }
 
     if (password2.value === '') {
-        showError(password2, 'Confirm your password is required')
+        showError(password2, 'Confirm your password')
     } else {
         showSuccess(password2);
     }
