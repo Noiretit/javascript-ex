@@ -9,6 +9,8 @@ const count = document.getElementById('count');
 const total = document.getElementById('total');
 const movieSelect = document.getElementById('movie');
 
+populateUI();
+
 // "+" in front of movieSelect.value turns a string into a number
 let ticketPrice = +movieSelect.value;
 
@@ -33,6 +35,27 @@ const updateSelectedCount = () => {
     
     count.innerText = selectedSeatsCount;
     total.innerText = selectedSeatsCount * ticketPrice;
+};
+
+// Get data from localStorage and populate the UI
+// Can't use an arrow functions, it throws "can't access before initialization"
+function populateUI() {
+    // JSON.parse turns it into an array (object)
+    const selectedSeats = JSON.parse(localStorage.getItem('selectedSeats'));
+
+    if (selectedSeats !== null && selectedSeats.length > 0) {
+      seats.forEach((seat, index) => {
+        if (selectedSeats.indexOf(index) > -1) {
+          seat.classList.add('selected');
+        }
+      });
+    }
+  
+    const selectedMovieIndex = localStorage.getItem('selectedMovieIndex');
+  
+    if (selectedMovieIndex !== null) {
+      movieSelect.selectedIndex = selectedMovieIndex;
+    }
 }
 
 // Movie select event
@@ -53,4 +76,8 @@ container.addEventListener('click', (e) => {
     }
 
     updateSelectedCount();
-})
+});
+
+// Initial count and total
+updateSelectedCount();
+
