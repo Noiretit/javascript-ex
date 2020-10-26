@@ -35,6 +35,12 @@ const doubleMoney = () => {
     });
 
     updateDOM();
+};
+
+const sortByRiches = () => {
+    data.sort((a, b) => b.money - a.money);
+
+    updateDOM();
 }
 
 // Add a new user to the data array
@@ -67,3 +73,4 @@ getRandomUser();
 // Event listeners
 addUserBtn.addEventListener('click', getRandomUser);
 doubleBtn.addEventListener('click', doubleMoney);
+sortBtn.addEventListener('click', sortByRiches);
