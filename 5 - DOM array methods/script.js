@@ -24,12 +24,27 @@ const getRandomUser = async () => {
     addData(newUser);
 };
 
+// Doubles user's money
+const doubleMoney = () => {
+    // "data" (line 8) is an array of objects
+    // Each object has "name" and "money"
+    // When map iterates through data, we tell it to return 
+    // the same (...user) but to double the money
+    data = data.map((user) => {
+        return { ...user, money: user.money * 2 }
+    });
+
+    updateDOM();
+}
+
+// Add a new user to the data array
 const addData = obj => {
     data.push(obj);
 
     updateDOM();
 };
 
+// Updates DOM with each user in the data array
 const updateDOM = (providedData = data) => {
     // Clear main david
     main.innerHTML = '<h2><strong>Person</strong> Wealth</h2>';
@@ -50,4 +65,5 @@ getRandomUser();
 
 
 // Event listeners
-addUserBtn.addEventListener('click', getRandomUser)
+addUserBtn.addEventListener('click', getRandomUser);
+doubleBtn.addEventListener('click', doubleMoney);
