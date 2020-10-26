@@ -26,8 +26,28 @@ const getRandomUser = async () => {
 
 const addData = obj => {
     data.push(obj);
-}
+
+    updateDOM();
+};
+
+const updateDOM = (providedData = data) => {
+    // Clear main david
+    main.innerHTML = '<h2><strong>Person</strong> Wealth</h2>';
+    providedData.forEach(person => {
+        const element = document.createElement('div');
+        element.classList.add('person');
+        element.innerHTML = `<strong>${person.name}</strong> ${formatMoney(person.money)}`;
+        main.appendChild(element);
+    });
+};
+
+// Format wealth as money
+const formatMoney = number => number.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ' €';
 
 getRandomUser();
 getRandomUser();
 getRandomUser();
+
+
+// Event listeners
+addUserBtn.addEventListener('click', getRandomUser)
